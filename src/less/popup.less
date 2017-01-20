@@ -62,7 +62,7 @@
     line-height: 1.625;
     color: #222222;
 
-    p {
+    .text {
       display: flex;
       width: 100%;
       height: 100%;
@@ -121,7 +121,7 @@
   background-color: fade(#555, 90%);
   padding: 25px 15px 0;
 
-  span {
+  .icon {
     display: inline-block;
     width: 32px;
     height: 32px;
@@ -129,7 +129,7 @@
     background: transparent url(../img/unbind-success.png) center/ cover no-repeat;
   }
 
-  p {
+  .text {
     margin-top: 15px;
     padding: 0;
     font-size: 16px;
@@ -147,7 +147,7 @@
   width: 212px;
   &:extend(.popup-success all);
 
-  span {
+  .icon {
     background-image: url(../img/unbind-failure.png);
   }
 }
@@ -156,7 +156,7 @@
   display: none;
   &:extend(.popup-success all);
 
-  span.loading {
+  .icon.loading {
     background-image: url(../img/unbind-loading.png);
     will-change: transform;
     animation: popup-loading 2s linear infinite;

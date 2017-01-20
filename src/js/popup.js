@@ -15,20 +15,20 @@ function popup() {
 
     //HTML模板
     var popupHTML = {
-        confirm: "<div class=\"confirm-text\"><p><\/p><\/div>" +
+        confirm: "<div class=\"confirm-text\"><p class=\"text\"><\/p><\/div>" +
         "<div class=\"confirm-button clear-fix\">" +
         "    <button class=\"button no\">取消<\/button>" +
         "    <button class=\"button yes\">确定<\/button>" +
         "<\/div>",
 
-        loading: "<span class=\"loading\"><\/span>" +
-        "<p><\/p>",
+        loading: "<span class=\"icon loading\"><\/span>" +
+        "<p class=\"text\"><\/p>",
 
-        success: "<span><\/span>" +
-        "<p><\/p>",
+        success: "<span class=\"icon\"><\/span>" +
+        "<p class=\"text\"><\/p>",
 
-        failure: "<span><\/span>" +
-        "<p><\/p>"
+        failure: "<span class=\"icon\"><\/span>" +
+        "<p class=\"text\"><\/p>"
     };
 
     var popupBox = document.getElementById('popup-box');
@@ -117,7 +117,7 @@ function popup() {
         popupMask.style.backgroundColor = opt.maskColor || options.confirm.maskColor;
         close();
         var popupConfirm = popupBox.getElementsByClassName('popup-confirm')[0];
-        var text = popupConfirm.getElementsByTagName('p')[0];
+        var text = popupConfirm.getElementsByClassName('text')[0];
         var yes = popupConfirm.getElementsByClassName('yes')[0];
         var no = popupConfirm.getElementsByClassName('no')[0];
         text.textContent = opt.text || options.confirm.text;
@@ -147,7 +147,7 @@ function popup() {
         popupMask.style.backgroundColor = opt.maskColor || options.loading.maskColor;
         close();
         var popupLoading = popupBox.getElementsByClassName('popup-loading')[0];
-        var text = popupLoading.getElementsByTagName('p')[0];
+        var text = popupLoading.getElementsByClassName('text')[0];
         text.textContent = opt.text || options.loading.text;
         popupLoading.style.display = 'block';
         popupBox.style.display = 'block';
@@ -161,7 +161,7 @@ function popup() {
         popupMask.style.backgroundColor = opt.maskColor || options.loading.maskColor;
         close();
         var popupSuccess = popupBox.getElementsByClassName('popup-success')[0];
-        var text = popupSuccess.getElementsByTagName('p')[0];
+        var text = popupSuccess.getElementsByClassName('text')[0];
         text.textContent = opt.text || options.success.text;
         popupSuccess.style.display = 'block';
         popupBox.style.display = 'block';
@@ -175,7 +175,7 @@ function popup() {
         popupMask.style.backgroundColor = opt.maskColor || options.loading.maskColor;
         close();
         var popupFailure = popupBox.getElementsByClassName('popup-failure')[0];
-        var text = popupFailure.getElementsByTagName('p')[0];
+        var text = popupFailure.getElementsByClassName('text')[0];
         text.textContent = opt.text || options.failure.text;
         popupFailure.style.display = 'block';
         popupBox.style.display = 'block';
