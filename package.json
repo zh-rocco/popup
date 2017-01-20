@@ -1,0 +1,31 @@
+{
+  "name": "popup",
+  "version": "1.0.0",
+  "description": "popup",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/username/repository.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "pzzd",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.18.5",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-base64": "^0.1.3",
+    "gulp-clean-css": "^2.3.2",
+    "gulp-jshint": "^2.0.4",
+    "gulp-less": "^3.3.0",
+    "gulp-notify": "^2.2.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^2.0.0",
+    "jshint": "^2.9.4",
+    "run-sequence": "^1.2.2"
+  }
+}
