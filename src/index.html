@@ -14,6 +14,33 @@
 </head>
 <body>
 
+<div id="popup-box" class="popup-box" style="display: none;">
+    <div class="popup-mask"></div>
+    <div class="popup-item popup-confirm">
+        <div class="confirm-text">
+            <p class="text">
+                解绑后将无法收到该设备的任何消息。您确定要解绑吗?
+            </p>
+        </div>
+        <div class="confirm-button clear-fix">
+            <button class="button no">取消</button>
+            <button class="button yes">确定</button>
+        </div>
+    </div>
+    <div class="popup-item popup-loading">
+        <span class="icon loading"></span>
+        <p class="text">解绑中</p>
+    </div>
+    <div class="popup-item popup-success">
+        <span class="icon"></span>
+        <p class="text">该设备已解除绑定</p>
+    </div>
+    <div class="popup-item popup-failure">
+        <span class="icon"></span>
+        <p class="text">该设备解绑失败 请重试</p>
+    </div>
+</div>
+
 <script src="js/popup.js"></script>
 <script src="js/main.js"></script>
 </body>
