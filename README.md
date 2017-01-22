@@ -15,24 +15,24 @@
 <script src="js/popup.min.js"></script>
 ```
 ### 2. API
+####a. `show(type, opt)` 显示相应弹窗，支持自定义部分内容和样式
 
- 1. `show(type, opt)` 显示相应弹窗，支持自定义部分内容和样式
-    |   type    |explain|
-    | --------  | ----- |
-    | "confirm" |询问|
-    | "loading" |加载中|
-    | "success" |成功|
-    | "failure" |失败|
+| type | explain |
+| ------ | ------ |
+| "confirm" | 询问 |
+| "loading" | 加载中 |
+| "success" | 成功 |
+| "failure" | 失败 |
 
-    |   opt     |explain|
-    | --------  | ----- |
-    | maskColor |遮罩层颜色（支持传入CSS颜色）|
-    | text      |弹窗内的文本（切记不要太长）|
-    | timeout   |弹窗自动消失时长（单位ms，默认所有弹窗不自动消失）|
-    | success   |确定按钮的回调函数|
-    | failure   |取消按钮的回调函数|
+| opt | explain |
+| ------ | ------ |
+| maskColor | 遮罩层颜色（支持传入CSS颜色）|
+| text  |弹窗内的文本（切记不要太长）|
+| timeout | 弹窗自动消失时长（单位ms，默认所有弹窗不自动消失）|
+| success | 确定按钮的回调函数 |
+| failure | 取消按钮的回调函数 |
 
- 2. `close()` 关闭popup生成的弹窗
+####b. `close()` 关闭popup生成的弹窗
 
 ## 三、例子
 
