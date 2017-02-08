@@ -1,16 +1,12 @@
 {
-  "name": "popup",
-  "version": "1.0.0",
-  "description": "popup",
+  "name": "Popup",
+  "version": "1.1.0",
+  "description": "Popup",
   "repository": {
     "type": "git",
-    "url": "git://github.com/username/repository.git"
+    "url": "git://github.com/no-nothing/repository.git"
   },
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "pzzd",
+  "author": "zzp",
   "license": "ISC",
   "devDependencies": {
     "browser-sync": "^2.18.5",
