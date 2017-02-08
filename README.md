@@ -28,7 +28,7 @@
 | ------ | ------ |
 | maskColor | 遮罩层颜色（支持传入CSS颜色）|
 | text  |弹窗内的文本（切记不要太长）|
-| timeout | 弹窗自动消失时长（单位ms，默认只有loading弹窗会自动消失）|
+| timeout | 弹窗自动消失时长（单位ms，默认所有弹窗都不会自动消失）|
 | buttonReverse | 对调"确定"按钮和"取消"按钮 |
 | success | 确定按钮的回调函数 |
 | failure | 取消按钮的回调函数 |
@@ -39,7 +39,7 @@
 
 ```js
 //创建一个popup实例
-var myPopup = popup();
+var myPopup = new Popup();
 
 //显示confirm弹窗
 myPopup.show('confirm', {
@@ -57,19 +57,12 @@ myPopup.show('confirm', {
     }
 });
 
-//显示loading弹窗（此时会自动关闭前面打开的confirm弹窗）
+//显示success弹窗（此时会自动关闭前面打开的confirm弹窗）
 myPopup.show('success', {
     //弹窗2s后自动关闭
     timeout: '2000'
 });
 
-//显示success弹窗
-myPopup.show('success');
-
-//2s后关闭弹窗（success弹窗）
-setTimeout(function () {
-    myPopup.close();
-}, 2000);
 ```
 
 ## 四、附加
