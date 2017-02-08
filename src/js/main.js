@@ -1,38 +1,35 @@
-var myPopup = popup();
+var myPopup = new Popup();
 
 myPopup.show('confirm', {
-    text: 'OK?',
-    maskColor: '',
+    maskColor: 'transparent',
+    text: 'Sure?',
     success: function () {
-        console.log('OK');
+        alert('yes');
     },
     failure: function () {
-        console.log('NO');
+        alert('no');
     }
 });
-/*setTimeout(function () {
- myPopup.show('success', {
- maskColor: '',
- text: 'success',
- success: function () {
- alert('From cb');
- },
- failure: function () {
- }
- });
- setTimeout(function () {
- myPopup.close();
- setTimeout(function () {
- myPopup.show('confirm', {
- maskColor: 'yellow',
- text: 'Sure?',
- success: function () {
- alert('click yes');
- },
- failure: function () {
- alert('click no');
- }
- })
- }, 3000)
- }, 1000)
- }, 2000);*/
+
+setTimeout(function () {
+    myPopup.show('success', {
+        maskColor: 'rgba(85,85,85,.3)',
+        text: 'success'
+    });
+    setTimeout(function () {
+        myPopup.close();
+        setTimeout(function () {
+            myPopup.show('confirm', {
+                maskColor: 'rgba(85,85,85,.3)',
+                text: 'Sure?',
+                buttonReverse: true,
+                success: function () {
+                    alert('yes');
+                },
+                failure: function () {
+                    alert('no');
+                }
+            })
+        }, 500)
+    }, 3000)
+}, 3000);

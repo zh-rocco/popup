@@ -38,7 +38,7 @@ gulp.task('less', function () {
     };
 
 
-    return gulp.src(['src/**/less/*.less', '!src/less/base.less'])
+    return gulp.src(['src/**/less/*.less'])
     //如果less文件中有语法错误，用plumber保证任务不会停止
         .pipe(plumber())
         .pipe(less())
@@ -85,7 +85,7 @@ gulp.task('css', function () {
         .pipe(gulp.dest('dist'));
 });
 
-// 压缩js、添加版本号
+// 压缩js
 gulp.task('js', function () {
     return gulp.src('src/js/popup.js')
         .pipe(jshint())

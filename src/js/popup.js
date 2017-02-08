@@ -1,9 +1,19 @@
-// 弹窗
-function popup() {
+/**
+ * Popup 1.1
+ *
+ * no-nothing @ github
+ * Copyright 2017, MIT License
+ *
+ */
+
+function Popup() {
     "use strict";
 
-    //判断DOM中是否存在id为"popup-box"的元素，如果没有，create
-    if (!document.getElementById('popup-box')) {
+    //判断DOM中是否存在id为"popup-box"的元素，没有的话创建
+    var flag = document.getElementById('popup-box') || document.getElementsByClassName('popup-box')[0];
+    if (flag) {
+        console.warn('请删除HTML中的"#popup-box"和".popup-box"元素,否则会出现意想不到的BUG');
+    } else {
         var create_popupBox = document.createElement('div');
         var create_popupMask = document.createElement('div');
         create_popupBox.setAttribute('id', 'popup-box');
@@ -33,43 +43,35 @@ function popup() {
 
     var popupBox = document.getElementById('popup-box');
     var popupMask = popupBox.getElementsByClassName('popup-mask')[0];
-    var popupItems = []; //popupBox下的所有已使用的弹窗集合
     var popupType = ['confirm', 'loading', 'success', 'failure']; //目前支持的弹窗类型
     var options = {
         confirm: {
-            width: '',
-            Height: '',
             maskColor: 'rgba(67, 67, 67, 0.5)',
             text: '解绑后将无法收到该设备的任何消息。您确定要解绑吗?',
+            buttonReverse: false,
             success: function () {
                 var popupConfirm = popupBox.getElementsByClassName('popup-confirm')[0];
                 popupBox.style.display = 'none';
                 popupConfirm.style.display = 'none';
-                console.log('success');
+                console.log('click success');
             },
             failure: function () {
                 var popupConfirm = popupBox.getElementsByClassName('popup-confirm')[0];
                 popupBox.style.display = 'none';
                 popupConfirm.style.display = 'none';
-                console.log('failure');
+                console.log('click failure');
             }
         },
         loading: {
-            width: '',
-            Height: '',
             maskColor: 'transparent',
             text: '解绑中...',
             timeout: '2000'
         },
         success: {
-            width: '',
-            Height: '',
             maskColor: 'transparent',
             text: '该设备已解除绑定'
         },
         failure: {
-            width: '',
-            Height: '',
             maskColor: 'transparent',
             text: '该设备解绑失败 请重试'
         }
@@ -85,10 +87,10 @@ function popup() {
     };
 
     // 阻止用户滑动，防止弹窗内的按钮点透
-    popupBox.addEventListener('touchmove', prevent, false);
-    popupBox.addEventListener('touchstart', stop, false);
-    popupBox.addEventListener('touchend', stop, false);
-    popupBox.addEventListener('click', stop, false);
+    popupMask.addEventListener('touchmove', prevent, false);
+    popupMask.addEventListener('touchstart', stop, false);
+    popupMask.addEventListener('touchend', stop, false);
+    popupMask.addEventListener('click', stop, false);
 
     //展示指定的popupItem，传入参数 confirm:确认? loading:加载动画 success:成功 failure:失败
     function show(type, opt) {
@@ -123,38 +125,41 @@ function popup() {
 
         //confirm添加点击事件
         if (type === 'confirm') {
+            if (opt.buttonReverse) {
+                options['confirm'].buttonReverse = opt.buttonReverse;
+            }
+            var buttons = popupItem.getElementsByClassName('button');
+            if (options['confirm'].buttonReverse) {
+                buttons[0].style.float = 'right';
+                buttons[1].style.float = 'left';
+            } else {
+                buttons[0].style.float = 'left';
+                buttons[1].style.float = 'right';
+            }
+
             var yes = popupItem.getElementsByClassName('yes')[0];
             var no = popupItem.getElementsByClassName('no')[0];
             addEvent(yes, opt.success, options.confirm.success);
             addEvent(no, opt.failure, options.confirm.failure);
         }
 
-        popupItem.style.display = 'block';
-        popupBox.style.display = 'block';
-
-        if (opt.timeout) {
+        if (type === 'loading') {
+            if (opt.timeout) {
+                options['loading'].timeout = opt.timeout;
+            }
             setTimeout(function () {
                 close();
-            }, opt.timeout)
+            }, options['loading'].timeout);
+        } else {
+            if (opt.timeout) {
+                setTimeout(function () {
+                    close();
+                }, opt.timeout);
+            }
         }
-    }
 
-    //confirm弹窗添加回掉函数
-    function addEvent(ele, cb, def) {
-        isFunction(cb) ? ele.onclick = function () {
-            def();
-            cb();
-        } :
-            ele.onclick = def;
-    }
-
-    /* 关闭所有弹窗 */
-    function close() {
-        popupItems = popupBox.getElementsByClassName('popup-item');
-        popupBox.style.display = 'none';
-        for (var i = 0, len = popupItems.length; i < len; i++) {
-            popupItems[i].style.display = 'none';
-        }
+        popupItem.style.display = 'block';
+        popupBox.style.display = 'block';
     }
 
     //生成HTML，type取 'confirm','loading','success','failure'
@@ -165,9 +170,27 @@ function popup() {
         popupBox.appendChild(popupItem);
     }
 
+    //confirm弹窗添加回掉函数
+    function addEvent(ele, cb, def) {
+        isFunction(cb) ? ele.onclick = function () {
+                def();
+                cb();
+            } :
+            ele.onclick = def;
+    }
+
     //判断是否为函数
     function isFunction(fn) {
         return Object.prototype.toString.call(fn) === '[object Function]';
+    }
+
+    /* 关闭所有弹窗 */
+    function close() {
+        var popupItems = popupBox.getElementsByClassName('popup-item'); //popupBox下的所有已使用的弹窗集合
+        popupBox.style.display = 'none';
+        for (var i = 0, len = popupItems.length; i < len; i++) {
+            popupItems[i].style.display = 'none';
+        }
     }
 
     //暴露API
