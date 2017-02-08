@@ -86,7 +86,7 @@ function Popup() {
     };
 
     // 阻止用户滑动，防止弹窗内的按钮点透
-    popupMask.addEventListener('touchmove', prevent, false);
+    popupBox.addEventListener('touchmove', prevent, false);
     popupMask.addEventListener('touchstart', stop, false);
     popupMask.addEventListener('touchend', stop, false);
     popupMask.addEventListener('click', stop, false);

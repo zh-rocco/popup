@@ -3,7 +3,6 @@
 @zIndex: 999999999;
 @fontSize: 16px;
 @letterSpacing: 1px;
-@lineHeight: 1;
 
 .clear-fix::before, .clear-fix::after {
   display: table;
@@ -34,7 +33,6 @@
   z-index: @zIndex;
   font-size: @fontSize;
   letter-spacing: @letterSpacing;
-  line-height: @lineHeight;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
@@ -64,7 +62,7 @@
   display: none;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -60%);
   border-radius: 10px;
   text-align: center;
   overflow: hidden;
@@ -137,7 +135,7 @@
   width: 188px;
   height: 112px;
   max-height: 112px;
-  padding: 25px 26px 24px;
+  padding: 25px 26px 25px;
   background-color: fade(#555, 90%);
   box-shadow: 2px 2px 8px -2px fade(#555, 50%);
 
@@ -153,8 +151,9 @@
     width: 100%;
     margin-top: 15px;
     color: #fff;
+    line-height: 1.25;
     white-space: nowrap;
-    overflow: hidden;
+    overflow-x: hidden;
   }
 }
 
@@ -167,7 +166,8 @@
   &:extend(.popup-success all);
 
   width: 212px;
-  padding: 25px 15px 24px;
+  padding-left: 15px;
+  padding-right: 15px;
 
   .icon {
     background-image: url(../img/unbind-failure.png);

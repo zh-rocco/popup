@@ -12,6 +12,7 @@ myPopup.show('confirm', {
     }
 });
 
+
 setTimeout(function () {
     myPopup.show('success', {
         maskColor: 'rgba(85, 85, 85, .3)',
@@ -21,7 +22,7 @@ setTimeout(function () {
         myPopup.show('loading', {
             maskColor: 'rgba(85, 85, 85, .3)',
             text: 'loading',
-            timeout: 5000
+            timeout: 10000
         });
     }, 1000);
-}, 3000);
+}, 5000);
