@@ -64,8 +64,7 @@ function Popup() {
         },
         loading: {
             maskColor: 'transparent',
-            text: '解绑中...',
-            timeout: '2000'
+            text: '解绑中...'
         },
         success: {
             maskColor: 'transparent',
@@ -143,19 +142,11 @@ function Popup() {
             addEvent(no, opt.failure, options.confirm.failure);
         }
 
-        if (type === 'loading') {
-            if (opt.timeout) {
-                options['loading'].timeout = opt.timeout;
-            }
+        //自动关闭
+        if (opt.timeout) {
             setTimeout(function () {
                 close();
-            }, options['loading'].timeout);
-        } else {
-            if (opt.timeout) {
-                setTimeout(function () {
-                    close();
-                }, opt.timeout);
-            }
+            }, opt.timeout);
         }
 
         popupItem.style.display = 'block';
