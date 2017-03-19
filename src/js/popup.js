@@ -1,5 +1,5 @@
 /**
- * Popup 1.1
+ * Popup 1.2
  *
  * no-nothing @ github
  * Copyright 2017, MIT License
@@ -10,12 +10,12 @@ function Popup() {
     "use strict";
 
     //判断DOM中是否存在id为"popup-box"的元素，没有的话创建
-    var flag = document.getElementById('popup-box') || document.getElementsByClassName('popup-box')[0];
+    let flag = document.getElementById('popup-box') || document.getElementsByClassName('popup-box')[0];
     if (flag) {
         console.warn('请删除HTML中的"#popup-box"和".popup-box"元素,否则会出现意想不到的BUG');
     } else {
-        var create_popupBox = document.createElement('div');
-        var create_popupMask = document.createElement('div');
+        let create_popupBox = document.createElement('div');
+        let create_popupMask = document.createElement('div');
         create_popupBox.setAttribute('id', 'popup-box');
         create_popupBox.classList.add('popup-box');
         create_popupMask.classList.add('popup-mask');
@@ -24,7 +24,7 @@ function Popup() {
     }
 
     //HTML模板
-    var popupHTML = {
+    const popupHTML = {
         confirm: "<div class=\"confirm-text\"><p class=\"text\"><\/p><\/div>" +
         "<div class=\"confirm-button clear-fix\">" +
         "    <button class=\"button no\">取消<\/button>" +
@@ -41,22 +41,22 @@ function Popup() {
         "<p class=\"text\"><\/p>"
     };
 
-    var popupBox = document.getElementById('popup-box');
-    var popupMask = popupBox.getElementsByClassName('popup-mask')[0];
-    var popupType = ['confirm', 'loading', 'success', 'failure']; //目前支持的弹窗类型
-    var options = {
+    let popupBox = document.getElementById('popup-box');
+    let popupMask = popupBox.getElementsByClassName('popup-mask')[0];
+    const popupType = ['confirm', 'loading', 'success', 'failure']; //目前支持的弹窗类型
+    let options = {
         confirm: {
             maskColor: 'rgba(67, 67, 67, 0.5)',
             text: '解绑后将无法收到该设备的任何消息。您确定要解绑吗?',
             buttonReverse: false,
             success: function () {
-                var popupConfirm = popupBox.getElementsByClassName('popup-confirm')[0];
+                let popupConfirm = popupBox.getElementsByClassName('popup-confirm')[0];
                 popupBox.style.display = 'none';
                 popupConfirm.style.display = 'none';
                 console.log('click success');
             },
             failure: function () {
-                var popupConfirm = popupBox.getElementsByClassName('popup-confirm')[0];
+                let popupConfirm = popupBox.getElementsByClassName('popup-confirm')[0];
                 popupBox.style.display = 'none';
                 popupConfirm.style.display = 'none';
                 console.log('click failure');
@@ -76,12 +76,14 @@ function Popup() {
         }
     }; //弹窗样式配置
 
-    var prevent = function (e) {
+    let time = null;
+
+    const prevent = function (e) {
         e.preventDefault();
         e.stopPropagation();
     };
 
-    var stop = function (e) {
+    const stop = function (e) {
         e.stopPropagation();
     };
 
@@ -93,6 +95,10 @@ function Popup() {
 
     //展示指定的popupItem，传入参数 confirm:确认? loading:加载动画 success:成功 failure:失败
     function show(type, opt) {
+        if (time !== null) {
+            clearTimeout(time);
+            time = null;
+        }
         //若不支持报错，停止运行
         if (popupType.indexOf(type) === -1) {
             console.error('请输入合法的"show(arg)",arg可选"confirm" "success" "failure" "loading"');
@@ -118,8 +124,8 @@ function Popup() {
         //配置样式和内容等
         popupMask.style.backgroundColor = options[type].maskColor;
         close();
-        var popupItem = popupBox.getElementsByClassName('popup-' + type)[0];
-        var text = popupItem.getElementsByClassName('text')[0];
+        let popupItem = popupBox.getElementsByClassName('popup-' + type)[0];
+        let text = popupItem.getElementsByClassName('text')[0];
         text.textContent = options[type].text;
 
         //confirm添加点击事件
@@ -127,7 +133,7 @@ function Popup() {
             if (opt.buttonReverse) {
                 options['confirm'].buttonReverse = opt.buttonReverse;
             }
-            var buttons = popupItem.getElementsByClassName('button');
+            let buttons = popupItem.getElementsByClassName('button');
             if (options['confirm'].buttonReverse) {
                 buttons[0].style.float = 'right';
                 buttons[1].style.float = 'left';
@@ -136,15 +142,15 @@ function Popup() {
                 buttons[1].style.float = 'right';
             }
 
-            var yes = popupItem.getElementsByClassName('yes')[0];
-            var no = popupItem.getElementsByClassName('no')[0];
+            let yes = popupItem.getElementsByClassName('yes')[0];
+            let no = popupItem.getElementsByClassName('no')[0];
             addEvent(yes, opt.success, options.confirm.success);
             addEvent(no, opt.failure, options.confirm.failure);
         }
 
         //自动关闭
         if (opt.timeout) {
-            setTimeout(function () {
+            time = setTimeout(function () {
                 close();
             }, opt.timeout);
         }
@@ -155,7 +161,7 @@ function Popup() {
 
     //生成HTML，type取 'confirm','loading','success','failure'
     function create(type) {
-        var popupItem = document.createElement('div');
+        let popupItem = document.createElement('div');
         popupItem.classList.add('popup-item', 'popup-' + type);
         popupItem.innerHTML = popupHTML[type];
         popupBox.appendChild(popupItem);
@@ -177,9 +183,13 @@ function Popup() {
 
     /* 关闭所有弹窗 */
     function close() {
-        var popupItems = popupBox.getElementsByClassName('popup-item'); //popupBox下的所有已使用的弹窗集合
+        if (time !== null) {
+            clearTimeout(time);
+            time = null;
+        }
+        let popupItems = popupBox.getElementsByClassName('popup-item'); //popupBox下的所有已使用的弹窗集合
         popupBox.style.display = 'none';
-        for (var i = 0, len = popupItems.length; i < len; i++) {
+        for (let i = 0, len = popupItems.length; i < len; i++) {
             popupItems[i].style.display = 'none';
         }
     }
